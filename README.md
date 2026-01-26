@@ -5,8 +5,16 @@
 
 ## 技術スタック（予定）
 フロントエンド
-Next.js TypeScript React
+```
+Next.js 
+TypeScript 
+React
+```
 バックエンド
-PHP Laravel
+```
+PHP 
+Laravel
+```
+
 インフラ　
 考え中
