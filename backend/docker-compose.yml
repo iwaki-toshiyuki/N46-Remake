@@ -1,0 +1,35 @@
+version: "3.9" # Docker Compose のバージョン
+
+services:
+  # Laravel アプリケーション用コンテナ
+  app:
+    build: .                 # 同ディレクトリの Dockerfile を使ってビルド
+    container_name: laravel_app
+    ports:
+      - "8000:8000"          # ホスト:コンテナ のポートマッピング
+    volumes:
+      - ./src:/var/www       # ローカルの src をコンテナにマウント
+    depends_on:
+      - db                   # DB コンテナ起動後に app を起動
+
+    # 外部からアクセスできるように 0.0.0.0 で起動
+    command: >
+      php artisan serve
+      --host=0.0.0.0
+      --port=8000
+  # データベース（MySQL）用コンテナ
+  db:
+    image: mysql:8.0
+    container_name: laravel_db
+    environment:
+      MYSQL_DATABASE: app_db         # 作成される DB 名
+      MYSQL_ROOT_PASSWORD: password  # root パスワード
+      TZ: Asia/Tokyo                 # タイムゾーン
+    ports:
+      - "3306:3306"                  # MySQL 接続用（ローカルツール用）
+    volumes:
+      - db-data:/var/lib/mysql       # DB データ永続化
+
+# DB データ永続化用ボリューム
+volumes:
+  db-data:
