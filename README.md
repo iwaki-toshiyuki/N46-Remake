@@ -117,3 +117,161 @@ Laravel
 - 診断履歴を保持することで分析や拡張が可能な設計
 
 
+了解です🔥
+そのまま README.md に貼れる Markdown形式 で整えます。
+
+⸻
+
+
+# 🐳 Docker × Laravel コマンド一覧
+
+---
+
+## 🚀 コンテナ関連
+
+### 🔹 起動（バックグラウンド）
+```bash
+docker compose up -d
+
+🔹 停止
+
+docker compose down
+
+🔹 再ビルド（Dockerfile変更時）
+
+docker compose up -d --build
+
+🔹 コンテナ状態確認
+
+docker compose ps
+
+🔹 DBボリュームも含めて完全削除
+
+⚠ DBデータも削除されます
+
+docker compose down -v
+
+
+⸻
+
+🖥 コンテナ内に入る
+
+🔹 bashで入る
+
+docker compose exec app bash
+
+
+⸻
+
+🗄 Migration関連
+
+🔹 マイグレーション実行
+
+docker compose exec app php artisan migrate
+
+🔹 全削除して再作成
+
+docker compose exec app php artisan migrate:fresh
+
+🔹 Seeder込みで再作成
+
+docker compose exec app php artisan migrate:fresh --seed
+
+🔹 ロールバック（1つ戻す）
+
+docker compose exec app php artisan migrate:rollback
+
+
+⸻
+
+🏗 Model関連
+
+🔹 Model + Migration 作成
+
+docker compose exec app php artisan make:model Model名 -m
+
+🔹 Model + Migration + Controller
+
+docker compose exec app php artisan make:model Model名 -mcr
+
+
+⸻
+
+🎮 Controller関連
+
+🔹 API Controller作成
+
+docker compose exec app php artisan make:controller Controller名 --api
+
+
+⸻
+
+🧪 Seeder関連
+
+🔹 Seeder作成
+
+docker compose exec app php artisan make:seeder Seeder名
+
+🔹 Seeder実行
+
+docker compose exec app php artisan db:seed
+
+
+⸻
+
+🧹 キャッシュ関連
+
+🔹 設定キャッシュ削除
+
+docker compose exec app php artisan config:clear
+
+🔹 キャッシュ削除
+
+docker compose exec app php artisan cache:clear
+
+🔹 ルートキャッシュ削除
+
+docker compose exec app php artisan route:clear
+
+
+⸻
+
+📦 依存関係関連
+
+🔹 composer install
+
+docker compose exec app composer install
+
+
+⸻
+
+🌐 アクセスURL
+
+http://localhost:8000
+
+
+⸻
+
+📌 Docker環境用 .env 設定
+
+DB_CONNECTION=mysql
+DB_HOST=db
+DB_PORT=3306
+DB_DATABASE=app_db
+DB_USERNAME=root
+DB_PASSWORD=password
+
+※ localhost は使用しない（Dockerではサービス名 db を指定する）
+
+⸻
+
+🔧 開発フロー例
+
+docker compose up -d
+docker compose exec app php artisan migrate
+docker compose exec app php artisan make:model Member -mcr
+
+---
+
+
+
