@@ -42,4 +42,24 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+ * 多対多リレーション（お気に入り）
+ * User は 複数の Member をお気に入りできる
+ */
+public function favoriteMembers()
+{
+    return $this->belongsToMany(Member::class, 'favorites');
 }
+
+/**
+ * 1対多リレーション
+ * User は 複数の診断結果を持つ
+ */
+public function diagnosisResults()
+{
+    return $this->hasMany(DiagnosisResult::class);
+}
+}
+
+
