@@ -123,137 +123,120 @@ Laravel
 ⸻
 
 
-# 🐳 Docker × Laravel コマンド一覧
+# Docker × Laravel コマンド一覧
 
 ---
 
-## 🚀 コンテナ関連
+##  コンテナ関連
 
-### 🔹 起動（バックグラウンド）
+### 起動（バックグラウンド）
 ```bash
 docker compose up -d
+```
 
-🔹 停止
-
+###  停止
+```bash
 docker compose down
+```
 
-🔹 再ビルド（Dockerfile変更時）
+###  再ビルド（Dockerfile変更時）
 
+```bash
 docker compose up -d --build
+```
 
-🔹 コンテナ状態確認
+### コンテナ状態確認
 
+```bash
 docker compose ps
+```
 
-🔹 DBボリュームも含めて完全削除
+### DBボリュームも含めて完全削除(DBデータも削除されます)
 
-⚠ DBデータも削除されます
-
+```bash
 docker compose down -v
+```
 
 
-⸻
+### コンテナ内に入る
 
-🖥 コンテナ内に入る
-
-🔹 bashで入る
-
+```bash
 docker compose exec app bash
+```
 
 
-⸻
+## Migration関連
 
-🗄 Migration関連
-
-🔹 マイグレーション実行
-
+### マイグレーション実行
+```bash
 docker compose exec app php artisan migrate
+```
 
-🔹 全削除して再作成
-
+### 全削除して再作成
+```bash
 docker compose exec app php artisan migrate:fresh
+```
 
-🔹 Seeder込みで再作成
-
-docker compose exec app php artisan migrate:fresh --seed
-
-🔹 ロールバック（1つ戻す）
-
+### ロールバック（1つ戻す）
+```bash
 docker compose exec app php artisan migrate:rollback
+```
 
 
-⸻
+## Model関連
 
-🏗 Model関連
+### Model + Migration 作成
 
-🔹 Model + Migration 作成
-
+```bash
 docker compose exec app php artisan make:model Model名 -m
+```
 
-🔹 Model + Migration + Controller
+### Model + Migration + Controller
 
+```bash
 docker compose exec app php artisan make:model Model名 -mcr
+```
 
 
-⸻
+## Controller関連
 
-🎮 Controller関連
+### API Controller作成
 
-🔹 API Controller作成
-
+```bash
 docker compose exec app php artisan make:controller Controller名 --api
+```
 
 
-⸻
+## キャッシュ関連
 
-🧪 Seeder関連
-
-🔹 Seeder作成
-
-docker compose exec app php artisan make:seeder Seeder名
-
-🔹 Seeder実行
-
-docker compose exec app php artisan db:seed
-
-
-⸻
-
-🧹 キャッシュ関連
-
-🔹 設定キャッシュ削除
-
+### 設定キャッシュ削除
+```bash
 docker compose exec app php artisan config:clear
+```
 
-🔹 キャッシュ削除
+### キャッシュ削除
 
+```bash
 docker compose exec app php artisan cache:clear
+```
 
-🔹 ルートキャッシュ削除
+### ルートキャッシュ削除
 
+```bash
 docker compose exec app php artisan route:clear
+```
 
 
-⸻
+### アクセスURL
 
-📦 依存関係関連
-
-🔹 composer install
-
-docker compose exec app composer install
-
-
-⸻
-
-🌐 アクセスURL
-
+```bash
 http://localhost:8000
+```
 
 
-⸻
+### Docker環境用 .env 設定
 
-📌 Docker環境用 .env 設定
-
+```bash
 DB_CONNECTION=mysql
 DB_HOST=db
 DB_PORT=3306
@@ -262,16 +245,17 @@ DB_USERNAME=root
 DB_PASSWORD=password
 
 ※ localhost は使用しない（Dockerではサービス名 db を指定する）
+```
 
-⸻
 
-🔧 開発フロー例
+## 開発フロー例
 
+```bash
 docker compose up -d
 docker compose exec app php artisan migrate
 docker compose exec app php artisan make:model Member -mcr
+```
 
----
 
 
 
