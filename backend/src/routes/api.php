@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MemberController;
+use App\Models\Member;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +24,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/health', function () {
     return ['status' => 'ok'];
 });
+
+// メンバー関連のAPIエンドポイント
+Route::apiResource('members', MemberController::class);
