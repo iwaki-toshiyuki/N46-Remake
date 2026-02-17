@@ -17,7 +17,7 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www
 
 # Laravelコピー
-COPY . .
+COPY . /var/www
 
 # 依存関係インストール
 RUN composer install --no-dev --optimize-autoloader
