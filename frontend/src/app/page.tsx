@@ -1,9 +1,9 @@
 import { fetchHealth } from '@/lib/api';
 
+// このページはサーバーサイドで動的に生成されるように設定
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  // バックエンドの /health エンドポイントを呼び出して疎通確認
-  const data = await fetchHealth();
 
   return (
    <main className="min-h-screen bg-gradient-to-br from-purple-100 to-pink-100 px-6 py-20">

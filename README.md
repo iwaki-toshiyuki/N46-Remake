@@ -24,7 +24,13 @@ Laravel
 ```
 
 インフラ　
-考え中
+```
+フロントエンド
+Vercel
+
+バックエンド
+Render
+```
 
 ## ER図概要
 ![ER図](docs/er-diagram.jpeg)
