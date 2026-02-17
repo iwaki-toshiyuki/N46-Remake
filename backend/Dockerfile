@@ -16,14 +16,11 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 # 作業ディレクトリ
 WORKDIR /var/www
 
-# Composerファイルコピー
-COPY src/composer.json src/composer.lock ./
+# Laravelコピー
+COPY src/ .
 
 # 依存関係インストール
 RUN composer install --no-dev --optimize-autoloader
-
-# Laravelコピー
-COPY src/ .
 
 # Nginx設定コピー
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
