@@ -125,6 +125,11 @@ Laravel
 
 # Docker × Laravel コマンド一覧
 
+backendディレクトリに移動
+```bash
+cd backend
+```
+
 ---
 
 ##  コンテナ関連
@@ -258,8 +263,14 @@ docker compose exec app php artisan make:model Member -mcr
 
 ## Next.js コマンド一覧
 
+frontendディレクトリに移動
+```bash
+cd frontend
+```
+
 ### 起動コマンド
 ```
+cd frontend
 npm run dev
 ```
 
