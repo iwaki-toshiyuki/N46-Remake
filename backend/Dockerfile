@@ -1,21 +1,35 @@
-# PHP 8.1 の公式イメージを使用
-FROM php:8.1
+# PHP + FPM
+FROM php:8.1-fpm
 
-# OS パッケージと PHP 拡張のインストール
-# OS パッケージのインストール
-# Git：composer install 時に使用
-# unzip：zip 解凍用
-# libzip-dev：PHP zip 拡張のビルドに必要
+# 必要なパッケージインストール
 RUN apt-get update && apt-get install -y \
+    nginx \
     git \
     unzip \
     libzip-dev \
-    && docker-php-ext-install \
-    pdo_mysql \
-    zip
+    zip \
+    && docker-php-ext-install pdo_mysql zip
 
-# Composer を公式イメージからコピー
+# Composer インストール
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# 作業ディレクトリ（Laravel のルート）
+# 作業ディレクトリ
 WORKDIR /var/www
+
+# Laravelコピー
+COPY . .
+
+# 依存関係インストール
+RUN composer install --no-dev --optimize-autoloader
+
+# Nginx設定コピー
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+
+# 権限設定
+RUN chown -R www-data:www-data storage bootstrap/cache
+
+# ポート
+EXPOSE 10000
+
+# 起動コマンド
+CMD ["sh", "-c", "php-fpm -D && nginx -g 'daemon off;'"]
