@@ -256,6 +256,21 @@ docker compose exec app php artisan migrate
 docker compose exec app php artisan make:model Member -mcr
 ```
 
+## Next.js コマンド一覧
+
+### 起動コマンド
+```
+npm run dev
+```
+
+### アクセスURL
+
+```bash
+http://localhost:3000
+```
+
+
+
 
 
 
