@@ -193,6 +193,24 @@ docker compose exec app php artisan migrate:fresh
 docker compose exec app php artisan migrate:rollback
 ```
 
+## Seeder関連
+
+### Seederを実行する
+```bash
+docker compose exec app php artisan db:seed
+```
+
+### マイグレーションをリセットして再投入する場合
+```bash
+docker compose exec app php artisan migrate:fresh --seed
+```
+
+### データ確認（Tinker）
+```bash
+docker compose exec app php artisan tinker
+
+App\Models\Member::all();
+```
 
 ## Model関連
 
