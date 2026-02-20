@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y \
     unzip \
     libzip-dev \
     zip \
-    && docker-php-ext-install pdo_mysql zip
+    && docker-php-ext-install pdo_mysql pdo_pgsql zip
 
 # Composer インストール
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
@@ -31,5 +31,5 @@ RUN chown -R www-data:www-data storage bootstrap/cache
 # ポート
 EXPOSE 10000
 
-# 起動コマンド
-CMD ["sh", "-c", "php-fpm -D && nginx -g 'daemon off;'"]
+# 起動コマンド（migrate追加）
+CMD ["sh", "-c", "php artisan migrate --force && php-fpm -D && nginx -g 'daemon off;'"]
