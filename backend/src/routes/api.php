@@ -26,4 +26,9 @@ Route::get('/health', function () {
 });
 
 // メンバー関連のAPIエンドポイント
-Route::apiResource('members', MemberController::class);
+//Route::apiResource('members', MemberController::class);
+
+// メンバーの一覧を取得するエンドポイント
+Route::get('/members', function () {
+    return \App\Models\Member::all();
+});
