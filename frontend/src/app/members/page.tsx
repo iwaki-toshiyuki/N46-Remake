@@ -29,8 +29,20 @@ export default async function MembersPage() {
   const members = await getMembers();
 
   return (
-    <main className="min-h-screen p-10 bg-gray-50">
-      <h1 className="text-3xl font-bold mb-8">メンバー一覧</h1>
+    <main className="min-h-screen bg-gradient-to-br from-purple-100 to-pink-100 px-6 py-20">
+
+      <h1 className="text-3xl font-bold text-fuchsia-700 mb-8">メンバー一覧</h1>
+
+      <a
+        href="/"
+        className="group bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden"
+      >
+        <div className="p-4 ">
+          <p className="text-sm font-medium text-gray-500 group-hover:text-gray-900">
+            戻る
+          </p>
+        </div>
+      </a>
 
       <div className="grid md:grid-cols-3 gap-6">
         {members.map((member) => (
@@ -60,6 +72,7 @@ export default async function MembersPage() {
           </div>
         ))}
       </div>
+
     </main>
   );
 }
