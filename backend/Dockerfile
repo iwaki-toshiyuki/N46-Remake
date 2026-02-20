@@ -33,4 +33,4 @@ RUN chown -R www-data:www-data storage bootstrap/cache
 EXPOSE 10000
 
 # 起動コマンド
-CMD ["sh", "-c", "php artisan migrate --force && php-fpm -D && nginx -g 'daemon off;'"]
+CMD ["sh", "-c", "php artisan migrate --force && php artisan db:seed --force && php-fpm -D && nginx -g 'daemon off;'"]
