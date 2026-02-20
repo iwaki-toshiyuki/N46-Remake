@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     git \
     unzip \
     libzip-dev \
+    libpq-dev \
     zip \
     && docker-php-ext-install pdo_mysql pdo_pgsql zip
 
@@ -31,5 +32,5 @@ RUN chown -R www-data:www-data storage bootstrap/cache
 # ポート
 EXPOSE 10000
 
-# 起動コマンド（migrate追加）
+# 起動コマンド
 CMD ["sh", "-c", "php artisan migrate --force && php-fpm -D && nginx -g 'daemon off;'"]
