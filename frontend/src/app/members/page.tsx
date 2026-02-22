@@ -1,5 +1,5 @@
 // src/app/members/page.tsx
-import Link from "next/link";
+import MembersDropdown from "./MembersDropdown";
 
 type Member = {
   id: number;
@@ -45,34 +45,8 @@ export default async function MembersPage() {
         </div>
       </a>
 
-      <div className="grid md:grid-cols-3 gap-6">
-        {members.map((member) => (
-          <Link
-            key={member.id}
-            href={`/members/${member.id}`}
-            className="bg-white rounded-xl shadow p-6"
-          >
-            <h2 className="text-xl font-semibold">
-              {member.name}
-            </h2>
-
-            <p className="text-sm text-gray-500">
-              ニックネーム：{member.nickname}
-            </p>
-
-            <p className="text-sm">
-              {member.generation}期生
-            </p>
-
-            <p className="text-sm">
-              誕生日：{member.birthday}
-            </p>
-
-            <p className="mt-3 text-sm text-gray-600">
-              {member.description}
-            </p>
-          </Link>
-        ))}
+      <div className="mt-8">
+        <MembersDropdown members={members} />
       </div>
 
     </main>
