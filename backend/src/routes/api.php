@@ -32,3 +32,6 @@ Route::get('/health', function () {
 Route::get('/members', function () {
     return \App\Models\Member::all();
 });
+
+// メンバーの詳細を取得するエンドポイント
+Route::get('/members/{id}', [MemberController::class, 'show']);
