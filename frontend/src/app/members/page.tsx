@@ -1,4 +1,5 @@
 // src/app/members/page.tsx
+import Link from "next/link";
 
 type Member = {
   id: number;
@@ -46,8 +47,9 @@ export default async function MembersPage() {
 
       <div className="grid md:grid-cols-3 gap-6">
         {members.map((member) => (
-          <div
+          <Link
             key={member.id}
+            href={`/members/${member.id}`}
             className="bg-white rounded-xl shadow p-6"
           >
             <h2 className="text-xl font-semibold">
@@ -69,7 +71,7 @@ export default async function MembersPage() {
             <p className="mt-3 text-sm text-gray-600">
               {member.description}
             </p>
-          </div>
+          </Link>
         ))}
       </div>
 

@@ -21,12 +21,17 @@ class MemberController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
+    // メンバー詳細取得
     public function show(string $id)
     {
-        //
+        $member = Member::with([
+                'status',
+                'diagnosisResults'
+            ])
+            ->withCount('favoritedByUsers')
+            ->findOrFail($id);
+
+        return response()->json($member);
     }
 
     /**
