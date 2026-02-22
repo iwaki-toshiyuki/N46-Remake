@@ -14,7 +14,7 @@ type Member = {
 async function getMember(id: string): Promise<Member> {
     // APIエンドポイントからメンバーの詳細を取得
   const res = await fetch(
-    `http://127.0.0.1:8000/api/members/${id}`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/members/${id}`,
     { cache: "no-store" }
   );
 
