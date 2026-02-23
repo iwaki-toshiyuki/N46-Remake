@@ -1,6 +1,7 @@
 
 import Link from "next/link";
-import { StarRating } from "@/components/StarRating";
+import { MemberRadarChart } from "@/components/MemberRadarChart";
+
 
 // メンバーの詳細情報の型定義
 export type MemberStatus = {
@@ -59,11 +60,7 @@ return (
                 <p>{member.generation}期生</p>
                 <p>誕生日：{member.birthday}</p>
                 <p>{member.description}</p>
-                <StarRating label="歌唱力" value={member.status.singing} />
-                <StarRating label="ダンス" value={member.status.dancing} />
-                <StarRating label="バラエティ" value={member.status.variety} />
-                <StarRating label="ビジュアル" value={member.status.visual}  />
-                <StarRating label="リーダーシップ" value={member.status.leadership} />
+                <MemberRadarChart status={member.status} />
                 <Link
                     href="/members"
                     className="text-blue-600 hover:underline">

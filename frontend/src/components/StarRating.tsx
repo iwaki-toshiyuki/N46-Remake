@@ -1,3 +1,5 @@
+// メンバーのステータスを星評価で表示するコンポーネント(使用していない)
+
 type StarProps = {
   label: string;
   value: number;
