@@ -271,7 +271,7 @@ class MemberStatusSeeder extends Seeder
 
         MemberStatus::create([
             'member_id' => 29, // 海邉 朱莉
-            'visual' => 3,
+            'visual' => 4,
             'dancing' => 3,
             'singing' => 5,
             'variety' => 3,
