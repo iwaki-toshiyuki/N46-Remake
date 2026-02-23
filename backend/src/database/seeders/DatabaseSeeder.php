@@ -12,7 +12,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // データベースシードの呼び出し
-        $this->call(MemberSeeder::class);
+        // シーダーの呼び出し
+        $this->call([
+        MemberSeeder::class,
+        MemberStatusSeeder::class,
+    ]);
     }
 }

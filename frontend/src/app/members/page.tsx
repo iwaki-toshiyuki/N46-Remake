@@ -1,6 +1,7 @@
 // src/app/members/page.tsx
 import MembersDropdown from "./MembersDropdown";
 
+
 type Member = {
   id: number;
   name: string;
@@ -39,8 +40,8 @@ export default async function MembersPage() {
         className="group bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden"
       >
         <div className="p-4 ">
-          <p className="text-sm font-medium text-gray-500 group-hover:text-gray-900">
-            戻る
+          <p className="text-sm font-medium text-fuchsia-700 group-hover:text-fuchsia-900">
+            トップページに戻る
           </p>
         </div>
       </a>
