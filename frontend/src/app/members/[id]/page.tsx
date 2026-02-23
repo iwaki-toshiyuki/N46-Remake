@@ -2,23 +2,24 @@
 import Link from "next/link";
 import { StarRating } from "@/components/StarRating";
 
+// メンバーの詳細情報の型定義
+export type MemberStatus = {
+  visual: number;
+  singing: number;
+  dancing: number;
+  variety: number;
+  leadership: number;
+};
 
-type Member = {
+// メンバーの基本情報とステータスを含む型定義
+export type Member = {
   id: number;
   name: string;
   nickname: string;
   generation: number;
   birthday: string;
   description: string;
-  status: {
-    singing: number;
-    dancing: number;
-    variety: number;
-    visual: number;
-    leadership: number;
-    
-    
-  };
+  status: MemberStatus;
 };
 
 // メンバーの詳細を取得する関数
