@@ -1,5 +1,7 @@
 
 import Link from "next/link";
+import { StarRating } from "@/components/StarRating";
+
 
 type Member = {
   id: number;
@@ -8,6 +10,15 @@ type Member = {
   generation: number;
   birthday: string;
   description: string;
+  status: {
+    singing: number;
+    dancing: number;
+    variety: number;
+    visual: number;
+    leadership: number;
+    
+    
+  };
 };
 
 // メンバーの詳細を取得する関数
@@ -47,7 +58,12 @@ return (
                 <p>{member.generation}期生</p>
                 <p>誕生日：{member.birthday}</p>
                 <p>{member.description}</p>
-                <Link 
+                <StarRating label="歌唱力" value={member.status.singing} />
+                <StarRating label="ダンス" value={member.status.dancing} />
+                <StarRating label="バラエティ" value={member.status.variety} />
+                <StarRating label="ビジュアル" value={member.status.visual}  />
+                <StarRating label="リーダーシップ" value={member.status.leadership} />
+                <Link
                     href="/members"
                     className="text-blue-600 hover:underline">
                     メンバー一覧に戻る
