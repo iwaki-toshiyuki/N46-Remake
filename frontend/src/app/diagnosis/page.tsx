@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 // -----------------------------
@@ -57,6 +58,9 @@ export default function DiagnosisPage() {
 
   // エラー発生時のメッセージ
   const [errorMessage, setErrorMessage] = useState<string>("");
+
+  // Next.js のルーター（ページ遷移に使用）
+  const router = useRouter();
 
   // -----------------------------
   // 初回マウント時に質問一覧を取得
@@ -139,9 +143,11 @@ export default function DiagnosisPage() {
         throw new Error(`診断に失敗しました（HTTP ${res.status}）`);
       }
 
-      const data: { member: Member } = await res.json();
-      setResult(data.member);
-      setStatus("result");
+      const data = await res.json();
+
+      // 診断結果ページ（既存の詳細ページ）へ遷移
+      router.push(`/members/${data.member.id}`);
+
     } catch (e) {
       setErrorMessage(
         e instanceof Error ? e.message : "不明なエラーが発生しました"
@@ -167,7 +173,14 @@ export default function DiagnosisPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-100 to-pink-100 flex flex-col items-center justify-center p-8">
-      <h1 className="text-3xl font-bold mb-10 text-pink-600">推しメン診断</h1>
+      <h1 className="text-3xl font-bold mb-10 text-fuchsia-600">推しメン診断</h1>
+      <a href="/ ">
+        <div className="p-4 ">
+          <p className="text-sm font-medium text-fuchsia-700 group-hover:text-fuchsia-900">
+            トップページに戻る
+          </p>
+        </div>
+      </a>
 
       {/* ローディング（質問取得中 or 診断送信中）*/}
       {(status === "loading" || status === "submitting") && (
@@ -191,7 +204,7 @@ export default function DiagnosisPage() {
           {/* プログレスバー */}
           <div className="w-full bg-gray-200 rounded-full h-2 mb-6">
             <div
-              className="bg-pink-400 h-2 rounded-full transition-all duration-300"
+              className="bg-purple-500 h-2 rounded-full transition-all duration-300"
               style={{
                 width: `${((currentIndex + 1) / questions.length) * 100}%`,
               }}
