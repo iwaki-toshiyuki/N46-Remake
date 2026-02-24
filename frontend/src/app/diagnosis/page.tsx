@@ -232,22 +232,24 @@ export default function DiagnosisPage() {
           </div>
 
           {/* もう一度試せるようにリセットボタンを提供 */}
-          <button
-            onClick={handleReset}
-            className="mt-8 px-6 py-3 bg-pink-500 text-white rounded-full
-                       hover:bg-pink-600 transition-colors duration-150"
-          >
-            もう一度診断する
-          </button>
+          <div className="mt-8 flex justify-center gap-4">
+            <button
+              onClick={handleReset}
+              className="px-6 py-3 bg-pink-500 text-white rounded-full
+                         hover:bg-pink-600 transition-colors duration-150"
+            >
+              もう一度診断する
+            </button>
 
-           {/* トップページに戻る */}
+            {/* トップページに戻る */}
             <Link
-            href="/"
-            className="mt-8 px-6 py-3 bg-pink-300 text-white rounded-full
-                      hover:bg-pink-400 transition-colors duration-150 inline-block"
-          >
-            トップページに戻る
-          </Link>
+              href="/"
+              className="px-6 py-3 bg-pink-300 text-white rounded-full
+                        hover:bg-pink-400 transition-colors duration-150 inline-block"
+            >
+              トップページに戻る
+            </Link>
+          </div>
         </div>
       )}
 
