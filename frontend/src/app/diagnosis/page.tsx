@@ -1,5 +1,5 @@
 "use client";
-
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 // -----------------------------
@@ -166,7 +166,7 @@ export default function DiagnosisPage() {
   // -----------------------------
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-8">
+    <div className="min-h-screen bg-gradient-to-br from-purple-100 to-pink-100 flex flex-col items-center justify-center p-8">
       <h1 className="text-3xl font-bold mb-10 text-pink-600">推しメン診断</h1>
 
       {/* ローディング（質問取得中 or 診断送信中）*/}
@@ -239,6 +239,15 @@ export default function DiagnosisPage() {
           >
             もう一度診断する
           </button>
+
+           {/* トップページに戻る */}
+            <Link
+            href="/"
+            className="mt-8 px-6 py-3 bg-pink-300 text-white rounded-full
+                      hover:bg-pink-400 transition-colors duration-150 inline-block"
+          >
+            トップページに戻る
+          </Link>
         </div>
       )}
 
