@@ -8,7 +8,8 @@ class DiagnosisChoice extends Model
 {
     protected $fillable = [
         'question_id',
-        'choice_text'
+        'choice_text',
+        'indicator', // 'visual'|'singing'|'dancing'|'variety'|'leadership'
     ];
 
     /**

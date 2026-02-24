@@ -22,6 +22,11 @@ return new class extends Migration
             // 選択肢のテキスト
             $table->string('choice_text', 255);
 
+            // この選択肢が対応する診断指標
+            // 値は member_statuses のカラム名と一致させることで、
+            // コントローラー側でそのまま動的プロパティとして参照できる
+            $table->enum('indicator', ['visual', 'singing', 'dancing', 'variety', 'leadership']);
+
             $table->timestamps();
         });
     }

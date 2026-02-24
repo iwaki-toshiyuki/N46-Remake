@@ -151,13 +151,25 @@ export default async function MemberDetail({
           </div>
         </div>
 
-        {/* 戻るリンク */}
-        <div className="mt-10 text-center">
+        <div className="mt-10 flex flex-col items-center gap-4">
+          {/* メンバー一覧に戻る */}
           <Link
             href="/members"
-            className={`inline-flex items-center gap-2 ${theme.link} font-medium transition-colors`}
+            className="px-6 py-3 bg-red-300 text-white rounded-full
+                      hover:bg-red-400 transition-colors duration-150
+                      inline-block"
           >
-            ← メンバー一覧に戻る
+            メンバー一覧に戻る
+          </Link>
+
+          {/* 診断画面に戻る */}
+          <Link
+            href="/diagnosis"
+            className="px-6 py-3 bg-blue-300 text-white rounded-full
+                      hover:bg-blue-400 transition-colors duration-150
+                      inline-block"
+          >
+            診断画面に戻る
           </Link>
         </div>
       </div>
