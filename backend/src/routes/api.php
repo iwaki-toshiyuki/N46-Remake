@@ -3,7 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\DiagnosisController;
+use App\Http\Controllers\DiagnosisQuestionController;
 use App\Models\Member;
+use App\Models\DiagnosisQuestion;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +39,9 @@ Route::get('/members', function () {
 
 // メンバーの詳細を取得するエンドポイント
 Route::get('/members/{id}', [MemberController::class, 'show']);
+
+// お気に入り登録のエンドポイント
+Route::get('/diagnosis/questions', [DiagnosisController::class, 'questions']);
+
+// 診断結果を保存するエンドポイント
+Route::post('/diagnosis', [DiagnosisController::class, 'diagnose']);

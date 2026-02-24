@@ -19,4 +19,13 @@ class DiagnosisChoice extends Model
     {
         return $this->belongsTo(DiagnosisQuestion::class, 'question_id');
     }
+
+    /**
+     * 逆側（多対1）
+     * 選択肢は 1人のメンバーに属する
+     */
+    public function member()
+{
+    return $this->belongsTo(Member::class);
+}
 }
