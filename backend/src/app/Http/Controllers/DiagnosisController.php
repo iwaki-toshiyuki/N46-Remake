@@ -22,87 +22,134 @@ class DiagnosisController extends Controller
     }
 
     /**
-     * 推しメン診断を実行するAPI
-     *
-     * POST /api/diagnosis
-     * body: { "choice_ids": number[] }
-     *
-     * ロジック概要:
-     * 1. 選択された choice_ids から各 indicator の選択回数を集計する
-     * 2. 全メンバーの member_statuses を取得し、
-     *    「ユーザーが重視した指標のスコアが高いメンバー」ほど高得点になるよう計算する
-     * 3. 最高得点のメンバーを結果として返す
-     *
-     * スコア計算式:
-     *   member_score += member_status[indicator] × user_preference_count[indicator]
-     * → ユーザーが選んだ指標を、そのメンバーがどれだけ得意としているかの積の合計
+    * 診断結果を計算するエンドポイント
+    * POST /api/diagnosis
+        * リクエスト例:
+        * {
+        *   "choice_ids": [1, 5, 9, 13, 17] // ユーザーが選択した選択肢のID
+        * }
+        * レスポンス例:
+        * {
+        *   "member": {
+        *     "id": 3,
+        *     "name": "梅澤 美波",
+        *     "status": {
+        *       "visual": 5,
+        *       "singing": 4,
+        *       "dancing": 5,
+        *       "variety": 5,
+        *       "leadership": 5
+        *     }
+        *   }
+        * }
      */
     public function diagnose(Request $request)
-    {
-        // ----------------------------------------
-        // ① リクエストから選択肢ID配列を取得・バリデーション
-        // ----------------------------------------
-        $choiceIds = $request->input('choice_ids');
+{
+    // -----------------------------
+    // ① リクエスト検証
+    // -----------------------------
+    $choiceIds = $request->input('choice_ids');
 
-        if (!$choiceIds || !is_array($choiceIds)) {
-            return response()->json(['error' => 'Invalid input'], 400);
+    if (!$choiceIds || !is_array($choiceIds)) {
+        return response()->json(['error' => 'Invalid input'], 400);
+    }
+
+    // -----------------------------
+    // ② indicator を集計（ユーザーベクトル作成）
+    // -----------------------------
+    $choices = DiagnosisChoice::whereIn('id', $choiceIds)->get();
+
+    $indicatorCounts = [
+        'visual' => 0,
+        'singing' => 0,
+        'dancing' => 0,
+        'variety' => 0,
+        'leadership' => 0,
+    ];
+
+    foreach ($choices as $choice) {
+        $indicatorCounts[$choice->indicator]++;
+    }
+
+    // ユーザーベクトル（順序固定）
+    $userVector = array_values($indicatorCounts);
+
+    // -----------------------------
+    // ③ 全メンバー取得
+    // -----------------------------
+    $members = Member::with('status')->get();
+
+    $scores = [];
+
+    foreach ($members as $member) {
+
+        if (!$member->status) {
+            continue;
         }
 
-        // ----------------------------------------
-        // ② 選択された choice から indicator を集計
-        // 例: ['visual' => 2, 'singing' => 1, ...]
-        // N+1を避けるために whereIn でまとめて取得
-        // ----------------------------------------
-        $choices = DiagnosisChoice::whereIn('id', $choiceIds)->get();
+        // メンバーベクトル
+        $memberVector = [
+            $member->status->visual,
+            $member->status->singing,
+            $member->status->dancing,
+            $member->status->variety,
+            $member->status->leadership,
+        ];
 
-        /** @var array<string, int> $indicatorCounts */
-        $indicatorCounts = [];
-        foreach ($choices as $choice) {
-            $ind = $choice->indicator;
-            $indicatorCounts[$ind] = ($indicatorCounts[$ind] ?? 0) + 1;
-        }
+        // -----------------------------
+        // ④ コサイン類似度を計算
+        // -----------------------------
+        $similarity = $this->cosineSimilarity($userVector, $memberVector);
 
-        // ----------------------------------------
-        // ③ 全メンバーと member_statuses を一括取得（N+1回避）
-        // ----------------------------------------
-        $members = Member::with('status')->get();
+        $scores[$member->id] = $similarity;
+    }
 
-        // ----------------------------------------
-        // ④ 各メンバーのスコアを計算
-        // ユーザーが重視した指標 × そのメンバーの指標値 の合計
-        // member_statuses のカラム名は indicator の値と一致している
-        // ----------------------------------------
-        /** @var array<int, int> $scores */
-        $scores = [];
-        foreach ($members as $member) {
-            // status が未設定のメンバーはスキップ
-            if (!$member->status) {
-                continue;
-            }
+    if (empty($scores)) {
+        return response()->json(['error' => 'No members found'], 500);
+    }
 
-            $score = 0;
-            foreach ($indicatorCounts as $indicator => $count) {
-                // member_status の動的プロパティで指標値を取得
-                $score += ($member->status->{$indicator} ?? 0) * $count;
-            }
+    // -----------------------------
+    // ⑤ スコア順にソート
+    // -----------------------------
+    arsort($scores);
 
-            $scores[$member->id] = $score;
-        }
+    // 上位3名を取得
+    $topThreeIds = array_slice(array_keys($scores), 0, 3);
 
-        // スコアが存在しない場合はエラーを返す
-        if (empty($scores)) {
-            return response()->json(['error' => 'No members found'], 500);
-        }
+    // -----------------------------
+    // ⑥ 上位3名からランダム選出
+    // -----------------------------
+    $winnerId = $topThreeIds[array_rand($topThreeIds)];
 
-        // ----------------------------------------
-        // ⑤ 最もスコアが高いメンバーを選出
-        // ----------------------------------------
-        arsort($scores);
-        $topMemberId = array_key_first($scores);
-        $member = Member::with('status')->find($topMemberId);
+    $winner = Member::with('status')->find($winnerId);
 
-        return response()->json([
-            'member' => $member,
+    return response()->json([
+        'member' => $winner,
         ]);
     }
+
+    /**
+     * コサイン類似度を計算
+     * 2つのベクトルの「方向の近さ」を返す（0〜1）
+     */
+    private function cosineSimilarity(array $a, array $b): float
+{
+    $dotProduct = 0; // 共通度
+    $normA = 0;      // ユーザーの強さ
+    $normB = 0;      // メンバーの強さ
+
+    foreach ($a as $i => $value) {
+        $dotProduct += $value * $b[$i];  // 内積
+        $normA += $value ** 2;           // ユーザーの長さ
+        $normB += $b[$i] ** 2;           // メンバーの長さ
+    }
+
+    // 長さが0のベクトルがある場合は類似度0とする
+    if ($normA == 0 || $normB == 0) {
+        return 0;
+    }
+
+    // コサイン類似度 = 内積 / (ユーザーの長さ * メンバーの長さ)
+    return $dotProduct / (sqrt($normA) * sqrt($normB));
+}
 }
