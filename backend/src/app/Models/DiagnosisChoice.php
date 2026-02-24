@@ -8,7 +8,8 @@ class DiagnosisChoice extends Model
 {
     protected $fillable = [
         'question_id',
-        'choice_text'
+        'choice_text',
+        'indicator', // 'visual'|'singing'|'dancing'|'variety'|'leadership'
     ];
 
     /**
@@ -19,13 +20,4 @@ class DiagnosisChoice extends Model
     {
         return $this->belongsTo(DiagnosisQuestion::class, 'question_id');
     }
-
-    /**
-     * 逆側（多対1）
-     * 選択肢は 1人のメンバーに属する
-     */
-    public function member()
-{
-    return $this->belongsTo(Member::class);
-}
 }
