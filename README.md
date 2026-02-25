@@ -9,32 +9,52 @@ https://n46-remake.vercel.app/
 乃木坂の推しメンを紹介するサービス
 
 ## 機能一覧
-- トップページ
-- メンバー一覧
-- 推しメン詳細（ステータス）
-- 推し診断
-- お気に入り
+### 1. メンバー一覧
+3〜6期のメンバーを期ごとに切り替えて閲覧できます。
+各メンバーの詳細ページへ遷移可能です。
+### 2. 推しメン詳細（ステータス）
+各メンバーを以下の5項目で数値化し、視覚的に表示しています。
+- ビジュアル
+- 歌唱力
+- ダンス
+- バラエティ
+- リーダーシップ
+### 3. 推しメン診断
+5つの質問に回答すると、回答傾向に基づいてあなたに合う推しメンを提案します。
 
-## 技術スタック（予定）
+### 今後、実装予定の機能
+- ログイン機能
+- 検索機能
+- お気に入り機能
+- 診断履歴保存
+
+
+## 技術スタック
 フロントエンド
 ```
 Next.js 
 TypeScript 
 React
 ```
+
 バックエンド
 ```
 PHP 
 Laravel
 ```
 
+DB
+```
+ローカル：MySQL
+
+本番（Render）：PostgreSQL
+```
+
 インフラ　
 ```
-フロントエンド
-Vercel
+フロントエンド: Vercel
 
-バックエンド
-Render
+バックエンド: Render
 ```
 
 ## ER図概要
@@ -272,15 +292,6 @@ DB_USERNAME=root
 DB_PASSWORD=password
 
 ※ localhost は使用しない（Dockerではサービス名 db を指定する）
-```
-
-
-## 開発フロー例
-
-```bash
-docker compose up -d
-docker compose exec app php artisan migrate
-docker compose exec app php artisan make:model Member -mcr
 ```
 
 ## Next.js コマンド一覧
