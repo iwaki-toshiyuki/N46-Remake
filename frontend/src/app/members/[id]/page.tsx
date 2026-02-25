@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { MemberRadarChart } from "@/components/MemberRadarChart";
 
+export const revalidate = 3600; // 🔥 1時間キャッシュ
 
 // メンバーの詳細情報の型定義
 export type MemberStatus = {
@@ -79,7 +80,6 @@ const defaultTheme = {
 async function getMember(id: string): Promise<Member> {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/members/${id}`,
-    { cache: "no-store" }
   );
 
   if (!res.ok) {

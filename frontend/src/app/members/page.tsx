@@ -1,6 +1,7 @@
 // src/app/members/page.tsx
 import MembersDropdown from "./MembersDropdown";
 
+export const revalidate = 3600; // 🔥 1時間キャッシュ
 
 type Member = {
   id: number;
@@ -15,9 +16,6 @@ type Member = {
 async function getMembers(): Promise<Member[]> {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/members`,
-    {
-      cache: "no-store", // 常に最新を取得（本番確認用）
-    }
   );
 
   if (!res.ok) {
