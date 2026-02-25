@@ -31,23 +31,25 @@ export default async function MembersPage() {
   const members = await getMembers();
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-purple-100 to-pink-100 px-6 py-20">
+    <main className="min-h-screen bg-gradient-to-br from-purple-100 to-pink-100 px-4 sm:px-6 py-12 md:py-20">
 
-      <h1 className="text-3xl font-bold text-fuchsia-700 mb-8">メンバー一覧</h1>
+      <div className="max-w-6xl mx-auto">
+        <h1 className="text-2xl sm:text-3xl font-bold text-fuchsia-700 mb-6 md:mb-8">メンバー一覧</h1>
 
-      <a
-        href="/"
-        className="group bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden"
-      >
-        <div className="p-4 ">
-          <p className="text-sm font-medium text-fuchsia-700 group-hover:text-fuchsia-900">
-            トップページに戻る
-          </p>
+        <a
+          href="/"
+          className="group bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden inline-block"
+        >
+          <div className="p-4">
+            <p className="text-sm font-medium text-fuchsia-700 group-hover:text-fuchsia-900">
+              トップページに戻る
+            </p>
+          </div>
+        </a>
+
+        <div className="mt-6 md:mt-8">
+          <MembersDropdown members={members} />
         </div>
-      </a>
-
-      <div className="mt-8">
-        <MembersDropdown members={members} />
       </div>
 
     </main>

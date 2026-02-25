@@ -31,7 +31,7 @@ export function MemberRadarChart({ status, color = "#812990" }: Props) {
   ];
 
   return (
-    <div className="w-full h-80">
+    <div className="w-full h-56 sm:h-64 md:h-80">
       <ResponsiveContainer>
         <RadarChart data={data} margin={{ top: 20, right: 40, bottom: 20, left: 40 }}>
           <PolarGrid />

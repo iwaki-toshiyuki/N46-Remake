@@ -102,21 +102,21 @@ export default async function MemberDetail({
   return (
     <main className={`min-h-screen ${theme.bg}`}>
       {/* ヒーローエリア */}
-      <div className={`${theme.hero} text-white py-16 px-6`}>
-        <div className="max-w-4xl mx-auto flex flex-col items-center text-center gap-4">
-          <span className="inline-block bg-white/20 text-white text-sm font-semibold px-4 py-1 rounded-full tracking-widest">
+      <div className={`${theme.hero} text-white py-10 sm:py-12 md:py-16 px-4 sm:px-6`}>
+        <div className="max-w-4xl mx-auto flex flex-col items-center text-center gap-3 md:gap-4">
+          <span className="inline-block bg-white/20 text-white text-xs sm:text-sm font-semibold px-3 sm:px-4 py-1 rounded-full tracking-widest">
             {member.generation}期生
           </span>
-          <h1 className="text-4xl md:text-5xl font-bold tracking-wide">{member.name}</h1>
-          <p className="text-white/80 text-lg">&ldquo;{member.nickname}&rdquo;</p>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide">{member.name}</h1>
+          <p className="text-white/80 text-base sm:text-lg">&ldquo;{member.nickname}&rdquo;</p>
         </div>
       </div>
 
       {/* コンテンツエリア */}
-      <div className="max-w-4xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 md:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-8">
           {/* プロフィール情報 */}
-          <div className={`bg-white rounded-2xl shadow-sm border ${theme.border} p-8 flex flex-col gap-6`}>
+          <div className={`bg-white rounded-2xl shadow-sm border ${theme.border} p-5 sm:p-6 md:p-8 flex flex-col gap-5 md:gap-6`}>
             <h2 className={`text-lg font-bold ${theme.title} border-b ${theme.border} pb-3`}>
               プロフィール
             </h2>
@@ -141,7 +141,7 @@ export default async function MemberDetail({
           </div>
 
           {/* ステータス */}
-          <div className={`bg-white rounded-2xl shadow-sm border ${theme.border} p-8 flex flex-col gap-6`}>
+          <div className={`bg-white rounded-2xl shadow-sm border ${theme.border} p-5 sm:p-6 md:p-8 flex flex-col gap-5 md:gap-6`}>
             <h2 className={`text-lg font-bold ${theme.title} border-b ${theme.border} pb-3`}>
               ステータス
             </h2>
