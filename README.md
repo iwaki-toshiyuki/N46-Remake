@@ -30,33 +30,25 @@ https://n46-remake.vercel.app/
 
 
 ## 技術スタック
-フロントエンド
-```
-Next.js 
-TypeScript 
-React
-Tailwind CSS
-```
+### フロントエンド
+- Next.js 
+- TypeScript 
+- React
+- Tailwind CSS
 
-バックエンド
-```
-PHP 
-Laravel
-```
+### バックエンド
+- PHP 
+- Laravel
 
-DB
-```
-ローカル：MySQL
+### データベース
+- ローカル：MySQL
 
-本番（Render）：PostgreSQL
-```
+- 本番（Render）：PostgreSQL
 
-インフラ　
-```
-フロントエンド: Vercel
+### インフラ　
+- フロントエンド: Vercel
 
-バックエンド: Render
-```
+- バックエンド: Render
 
 ## ER図概要
 ![ER図](docs/er-diagram.jpeg)
