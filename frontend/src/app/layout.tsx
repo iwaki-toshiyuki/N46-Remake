@@ -15,6 +15,21 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "N46 Remake",
   description: "次の推しメンを見つけよう。",
+  openGraph: {
+    title: "N46 Remake",
+    description: "次の推しメンを見つけよう。",
+    url: "https://n46-remake.vercel.app",
+    siteName: "N46 Remake",
+    images: [
+      {
+        url: "/ogp.jpeg",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "ja_JP",
+    type: "website",
+  },
 };
 
 export const viewport: Viewport = {
