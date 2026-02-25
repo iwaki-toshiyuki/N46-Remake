@@ -172,8 +172,8 @@ export default function DiagnosisPage() {
   // -----------------------------
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-100 to-pink-100 flex flex-col items-center justify-center p-8">
-      <h1 className="text-3xl font-bold mb-10 text-fuchsia-600">推しメン診断</h1>
+    <div className="min-h-screen bg-gradient-to-br from-purple-100 to-pink-100 flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 py-8">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-8 md:mb-10 text-fuchsia-600">推しメン診断</h1>
       <a href="/ ">
         <div className="p-4 ">
           <p className="text-sm font-medium text-fuchsia-700 group-hover:text-fuchsia-900">
@@ -245,7 +245,7 @@ export default function DiagnosisPage() {
           </div>
 
           {/* もう一度試せるようにリセットボタンを提供 */}
-          <div className="mt-8 flex justify-center gap-4">
+          <div className="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
             <button
               onClick={handleReset}
               className="px-6 py-3 bg-pink-500 text-white rounded-full

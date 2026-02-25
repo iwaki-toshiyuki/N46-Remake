@@ -32,9 +32,9 @@ export default function MembersDropdown({ members }: Props) {
     .sort((a, b) => a - b);
 
   return (
-    <div className="grid md:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
       {generations.map((gen) => (
-        <div key={gen} className="bg-white rounded-2xl shadow-md p-6">
+        <div key={gen} className="bg-white rounded-2xl shadow-md p-4 sm:p-6">
           {/* 期ごとの見出し */}
           <h2 className="text-xl font-bold text-fuchsia-700 mb-4">
             {gen}期生
