@@ -35,6 +35,7 @@ https://n46-remake.vercel.app/
 Next.js 
 TypeScript 
 React
+Tailwind CSS
 ```
 
 バックエンド
