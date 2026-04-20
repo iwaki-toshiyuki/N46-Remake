@@ -29,6 +29,17 @@ Route::get('/health', function () {
     return ['status' => 'ok'];
 });
 
+// Supabase スリープ防止用のpingエンドポイント
+// 外部cronサービス（cron-job.org など）から10分おきに叩く
+Route::get('/ping', function () {
+    try {
+        \Illuminate\Support\Facades\DB::selectOne('SELECT 1');
+        return response()->json(['status' => 'ok']);
+    } catch (\Exception $e) {
+        return response()->json(['status' => 'error'], 500);
+    }
+});
+
 // メンバー関連のAPIエンドポイント
 //Route::apiResource('members', MemberController::class);
 
