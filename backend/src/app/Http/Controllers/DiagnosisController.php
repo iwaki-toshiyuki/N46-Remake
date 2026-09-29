@@ -31,14 +31,14 @@ class DiagnosisController extends Controller
         * レスポンス例:
         * {
         *   "member": {
-        *     "id": 3,
-        *     "name": "梅澤 美波",
+        *     "id": 1,
+        *     "name": "伊藤 理々杏",
         *     "status": {
-        *       "visual": 5,
-        *       "singing": 4,
-        *       "dancing": 5,
-        *       "variety": 5,
-        *       "leadership": 5
+        *       "visual": 4,
+        *       "singing": 3,
+        *       "dancing": 4,
+        *       "variety": 4,
+        *       "leadership": 3
         *     }
         *   }
         * }

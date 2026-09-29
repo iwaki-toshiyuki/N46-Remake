@@ -32,24 +32,6 @@ class MemberSeeder extends Seeder
             'description' => '乃木坂46 3期生メンバー',
         ]);
 
-        Member::create([
-            'name' => '梅澤 美波',
-            'nickname' => 'みなみ',
-            'generation' => 3,
-            'birthday' => '1999-01-06',
-            'image_url' => null,
-            'description' => '乃木坂46 3期生メンバー',
-        ]);
-
-        Member::create([
-            'name' => '吉田 綾乃クリスティー',
-            'nickname' => 'あやの',
-            'generation' => 3,
-            'birthday' => '1995-09-06',
-            'image_url' => null,
-            'description' => '乃木坂46 3期生メンバー',
-        ]);
-
         // 4期生
         Member::create([
             'name' => '遠藤 さくら',
@@ -83,15 +65,6 @@ class MemberSeeder extends Seeder
             'nickname' => 'はるか',
             'generation' => 4,
             'birthday' => '2004-01-19',
-            'image_url' => null,
-            'description' => '乃木坂46 4期生メンバー',
-        ]);
-
-        Member::create([
-            'name' => '佐藤 璃果',
-            'nickname' => 'りか',
-            'generation' => 4,
-            'birthday' => '2001-08-09',
             'image_url' => null,
             'description' => '乃木坂46 4期生メンバー',
         ]);
